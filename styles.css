@@ -26,3 +26,52 @@ ul{
     margin-inline: auto;
     overflow: hidden;
 }
+nav{
+    background-color: #BDE0FE;
+    box-shadow:0 0 4px #bbd0e2;
+    position: fixed;
+    top:0;
+    z-index: 99;
+    left: 0;
+    right: 0;
+}
+.main-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 8px;
+}
+.company-logo img{
+    width: 120px;
+}
+.nav-links ul{
+    gap: 16px;
+}
+.hover-link{
+    cursor: pointer;
+}
+.hover-link:hover{
+    color: #cf0e0e;
+}
+.hover-link:active{
+    color: #46021c;
+}
+.search-bar{
+    height: 32px;
+    gap: 8px;
+}
+.news-input{
+    width: 150px;
+    height: 100%;
+    padding-inline: 12px;
+    border-radius: 4px;
+    border: 2px solid black;
+}
+.search-button{
+    padding: 8px 24px;
+    background-color: #9d4edd;
+    color: white;
+    border-radius: 4px;
+    border: none;
+
+}
