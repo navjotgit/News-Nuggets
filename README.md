@@ -14,3 +14,10 @@ Diverse Topics: From global events to local highlights, our coverage spans a wid
 User-Friendly Design: The streamlined format makes it easy to scan headlines and read summaries, making News Nuggets perfect for busy individuals on the go.
 
 Why Choose News Nuggets? In a world where time is precious, News Nuggets offers a refreshing approach to news consumption. Our succinct updates allow you to stay informed efficiently, ensuring you get the essential information you need without sifting through lengthy articles. Join us as we redefine news delivery for the modern reader.
+
+
+#Team Members:
+Riya Sharma
+Vanshika Sardana
+Navjot 
+Harsh
