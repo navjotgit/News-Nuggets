@@ -97,3 +97,19 @@
     background-image: url(Footer_images/brett-jordan-aJ08i9-5k7E-unsplash.jpg);
     background-size: contain;
 }
+.list-group-item1{
+    text-decoration: none;
+}
+
+#dark-mode:hover{
+     cursor: pointer;
+}
+
+.dark{
+    background-color: black;
+    color: white;
+}
+.light{
+    background-color: white;
+    color: black;
+}
