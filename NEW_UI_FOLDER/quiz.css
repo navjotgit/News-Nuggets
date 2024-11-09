@@ -1,3 +1,13 @@
+body {
+    background: linear-gradient(135deg, hsl(305, 74%, 63%), #fe9bf6); /* Purple and blue gradient */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
 .quiz-container {
     background:gold;
