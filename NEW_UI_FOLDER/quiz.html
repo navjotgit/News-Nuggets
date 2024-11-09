@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Nuggets Quiz </title>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>News Nuggets Quiz</h1>
+    <div class="question-container">
+        <!-- Questions will be dynamically loaded here -->
+    </div>
+    <div class="controls">
+        <button id="next-btn" class="btn" onclick="nextQuestion()">Next</button>
+        <button id="submit-btn" class="btn" onclick="submitQuiz()">Submit</button>
+    </div>
+</div>
+
+<script>
+    let currentQuestionIndex = 0;
+    let quizData = [];
+    let selectedAnswers = [];
+
+    // Fetching quiz data from the API
+    async function fetchQuizData() {
+        const response = await fetch('https://opentdb.com/api.php?amount=10&type=multiple');
+        const data = await response.json();
+        quizData = data.results;
+        loadQuestion();
+    }
+
+    // Function to load the current question
+    function loadQuestion() {
+        const currentQuestion = quizData[currentQuestionIndex];
+        const questionContainer = document.querySelector('.question-container');
+
+        // Clean previous question and load the new one
+        questionContainer.innerHTML = `
+            <h2>${currentQuestion.question}</h2>
+            <div class="options">
+                ${currentQuestion.incorrect_answers.concat(currentQuestion.correct_answer)
+                    .sort(() => Math.random() - 0.5)  // Shuffle options
+                    .map((option, index) => `
+                        <div class="option" onclick="selectOption(${index}, '${option}')">${option}</div>
+                    `).join('')}
+            </div>
+        `;
+
+        selectedAnswers[currentQuestionIndex] = null;  // Reset selected answer
+        document.getElementById('next-btn').style.display = 'none';  // Hide "Next" button initially
+        document.getElementById('submit-btn').style.display = 'none';  // Hide submit button initially
+    }
+
+    // Function to select an option
+    function selectOption(index, option) {
+        const options = document.querySelectorAll('.option');
+        options.forEach(option => option.classList.remove('selected'));
+        options[index].classList.add('selected');
+        selectedAnswers[currentQuestionIndex] = option;
+        document.getElementById('next-btn').style.display = 'inline-block';  // Show "Next" button
+    }
+
+    // Function to move to the next question
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.length) {
+            loadQuestion();
+        } else {
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('submit-btn').style.display = 'inline-block';
+        }
+    }
+
+    // Function to submit the quiz
+    function submitQuiz() {
+        let correctAnswers = 0;
+        quizData.forEach((question, index) => {
+            const userAnswer = selectedAnswers[index];
+            if (userAnswer === question.correct_answer) {
+                correctAnswers++;
+                markAnswer(index, true);  // Correct answer
+            } else {
+                markAnswer(index, false);  // Incorrect answer
+            }
+        });
+        alert(`You got ${correctAnswers} out of ${quizData.length} correct!`);
+    }
+
+    // Function to mark the answer (green for correct, red for incorrect)
+    function markAnswer(index, isCorrect) {
+        const options = document.querySelectorAll('.option');
+        const correctAnswer = quizData[index].correct_answer;
+        options.forEach(option => {
+            if (option.textContent === correctAnswer) {
+                option.classList.add('correct');
+            }
+            if (option.textContent === selectedAnswers[index] && option.textContent !== correctAnswer) {
+                option.classList.add('incorrect');
+            }
+        });
+    }
+
+    // Initializing the quiz
+    fetchQuizData();
+
+</script>
+
+</body>
+</html>
